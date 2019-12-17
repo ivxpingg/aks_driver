@@ -1,0 +1,52 @@
+.ivx-row {
+  display: flex;
+  .ivx-item {
+    font-size: 13px;
+    line-height: 26px;
+    &.ivx-item_1 {
+      flex: 1;
+    }
+    &.ivx-item_2 {
+      flex: 2;
+    }
+    &.ivx-item_3 {
+      flex: 3;
+    }
+
+    .ivx-title {
+      color: #A4A4A4;
+    }
+    .ivx-value {
+      color: #000000;
+    }
+
+    .class-status {
+      position: relative;
+      padding-left: 10px;
+      &.color_blue {
+        color: #2db7f5;
+        &:after {
+          background-color: #2db7f5;
+        }
+      }
+      &.color_green {
+        color: #19be6b;
+        &:after {
+          background-color: #19be6b;
+        }
+      }
+      &:after {
+        position: absolute;
+        display: block;
+        content: " ";
+        left: 0;
+        top: 50%;
+        margin-top: -5px;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        background-color: transparent;
+      }
+    }
+  }
+}
