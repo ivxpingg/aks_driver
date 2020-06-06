@@ -5,7 +5,7 @@ import store from '../store/store';
 import Config from '../config';
 Vue.use(Router);
 
-const whiteList = ['/login', '/register'];
+const whiteList = ['/login', '/register', '/userPolicy', '/privacyPolicy', '/userCenter'];
 const typeList = ['super_admin', 'admin', 'teacher', 'student'];
 const router = new Router({
     base: '/',

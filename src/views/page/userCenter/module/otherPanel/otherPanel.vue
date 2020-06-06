@@ -1,26 +1,29 @@
 <template>
     <div class="otherPanel-container">
         <van-cell-group>
-            <van-cell title="常用信息管理" is-link>
-                <van-icon slot="icon"
-                          size="20px"
-                          color="#999"
-                          name="newspaper-o">
-                </van-icon>
-            </van-cell>
-            <van-cell title="反馈与建议" is-link>
-                <van-icon slot="icon"
-                          size="20px"
-                          color="#999"
-                          name="records">
-                </van-icon>
-            </van-cell>
-            <van-cell title="消息通知" is-link>
-                <van-icon slot="icon"
-                          size="20px"
-                          color="#999"
-                          name="bell">
-                </van-icon>
+<!--            <van-cell title="常用信息管理" is-link>-->
+<!--                <van-icon slot="icon"-->
+<!--                          size="20px"-->
+<!--                          color="#999"-->
+<!--                          name="newspaper-o">-->
+<!--                </van-icon>-->
+<!--            </van-cell>-->
+<!--            <van-cell title="反馈与建议" is-link>-->
+<!--                <van-icon slot="icon"-->
+<!--                          size="20px"-->
+<!--                          color="#999"-->
+<!--                          name="records">-->
+<!--                </van-icon>-->
+<!--            </van-cell>-->
+<!--            <van-cell title="消息通知" is-link>-->
+<!--                <van-icon slot="icon"-->
+<!--                          size="20px"-->
+<!--                          color="#999"-->
+<!--                          name="bell">-->
+<!--                </van-icon>-->
+<!--            </van-cell>-->
+            <van-cell title="隐私协议" is-link url="/privacyPolicy">
+
             </van-cell>
         </van-cell-group>
     </div>

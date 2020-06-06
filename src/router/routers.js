@@ -15,6 +15,22 @@ const Login = [
             title: '注册'
         },
         component: () => import('../views/page/register/registerPage.vue')
+    },
+    {
+        path: '/userPolicy',
+        name: 'userPolicy',
+        meta: {
+            title: '用户协议'
+        },
+        component: () => import('../views/page/content/userPolicy.vue')
+    },
+    {
+        path: '/privacyPolicy',
+        name: 'privacyPolicy',
+        meta: {
+            title: '隐私协议'
+        },
+        component: () => import('../views/page/content/privacyPolicy.vue')
     }
 ];
 

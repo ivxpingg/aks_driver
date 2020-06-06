@@ -2,7 +2,7 @@
     <div class="userCenter-container">
         <vUserHeader></vUserHeader>
         <!--<vOrderNav></vOrderNav>-->
-        <!--<vOtherPanel></vOtherPanel>-->
+        <vOtherPanel></vOtherPanel>
 
         <div class="logout" @click="logout">退 出 登 录</div>
     </div>

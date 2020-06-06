@@ -23,8 +23,7 @@
         components: {vLog, vRegister},
         data () {
             return {
-                activeName: 'login',
-
+                activeName: 'login'
             };
         }
     }

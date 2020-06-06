@@ -23,22 +23,22 @@ module.exports = {
     lintOnSave: false,
     devServer: {
         open: false,
-        host: '192.168.0.188',
+        host: 'localhost',
         port: 9002,
         hot: true,
         https: false,
         hotOnly: false,
         proxy: {
-            '/aks_driver': {
-                target: 'http://110.86.21.246:8887',
-                ws: true,
-                changeOrigin: true
-            },
             // '/aks_driver': {
-            //     target: 'http://124.88.217.239:8002/',
+            //     target: 'http://110.86.21.246:8887',
             //     ws: true,
             //     changeOrigin: true
-            // }
+            // },
+            '/aks_driver': {
+                target: 'http://124.88.217.239:8002/',
+                ws: true,
+                changeOrigin: true
+            }
         }
     },
 }
