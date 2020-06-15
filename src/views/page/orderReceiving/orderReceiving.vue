@@ -186,28 +186,6 @@
 
             // 上传司机位置
             uploadDriverPosition() {
-
-                // let that = this;
-                // let r;
-                // this.BD_getLocation( (e) => {
-                //     r = e;
-                //
-                //     that.timerForDriverPosition = setTimeout(() => {
-                //         that.uploadDriverPosition();
-                //     }, 5000);
-                //     if (r.state && !!r.lng) {
-                //         that.$http({
-                //             method: 'get',
-                //             url: '/taxi/saveDriverPosition',
-                //             params: {
-                //                 lng: r.lng,
-                //                 lat: r.lat
-                //             }
-                //         })
-                //     }
-                //
-                // });
-
                 let r = this.BD_getLocation_app();
                 this.timerForDriverPosition = setTimeout(() => {
                     this.uploadDriverPosition();

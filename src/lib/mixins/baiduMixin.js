@@ -93,6 +93,30 @@ export default {
         BD_LocalSearch(map, point, callback ) {
             let geocoder = new BMap.Geocoder();
             geocoder.getLocation(point, callback);
+        },
+        /**
+         * 唤起驾车导航
+         * @param beginLat
+         * @param beginLng
+         * @param endLat
+         * @param endLng
+         * @param beginAddress
+         * @param endAddress
+         * @param mode  导航模式
+         * @param mapType 地图类型，默认百度地图:0;  高德地图： 1； 腾讯地图： 2
+         * @constructor
+         */
+        BD_driver_baidu(beginLat, beginLng, endLat, endLng, beginAddress, endAddress, mode, mapType) {
+            mode = mode || 'driving'
+            let packageName = 'com.baidu.BaiduMap'
+            switch (mapType) {
+                case 0: packageName = 'com.baidu.BaiduMap'; break;
+                case 1: packageName = 'com.autonavi.minimap'; break;
+                case 2: packageName = 'com.tencent.map'; break;
+                default: packageName = 'com.baidu.BaiduMap';
+            }
+            let str = `${beginLat},${beginLng},${endLat},${endLng},${beginAddress},${endAddress},${mode},${packageName}`;
+            Toaster.postMessage(str);
         }
 
     }

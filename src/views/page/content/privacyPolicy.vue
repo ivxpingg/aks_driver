@@ -3,7 +3,7 @@
         <van-sticky :offset-top="0">
             <van-nav-bar class="nav-bar-main"
                          left-arrow
-                         title="隐私协议" @click-left="com_goto('login', {activeName: 'register'})"></van-nav-bar>
+                         title="隐私协议" @click-left="com_back"></van-nav-bar>
         </van-sticky>
         <div class="content">
             <h3>隐私政策</h3>

@@ -30,21 +30,14 @@
             <van-button round type="info"
                         color="rgb(26,216,226)"
                         size="large"
-                        :disabled="!agree"
                         @click="login">登 录</van-button>
 
             <van-button round type="info"
                         color="rgb(26,216,226)"
                         size="large"
-                        :disabled="!agree"
                         @click="com_goto('register')" style="margin-top: 20px;">注 册</van-button>
         </div>
-        <div style="padding-top: 20px;">
-            <van-checkbox v-model="agree" shape="square" icon-size="14">请您在使用姑墨交通出行APP前仔细阅读并同意</van-checkbox>
-            <span style="color: #1989fa" @click="$router.push({name: 'userPolicy'})">《用户协议》</span>
-            <span>和</span>
-            <span style="color: #1989fa" @click="$router.push({name: 'privacyPolicy'})">《隐私协议》</span>
-        </div>
+
     </div>
 </template>
 
@@ -70,7 +63,6 @@
             return {
                 onFocus: false,
                 loading: false,
-                agree: false,
                 formData: {
                     userName: '', // 98765432101
                     password: '',

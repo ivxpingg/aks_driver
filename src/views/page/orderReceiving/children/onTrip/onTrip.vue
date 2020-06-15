@@ -15,7 +15,7 @@
                 <div v-if="orderData.orderStatus === 'receive_order' && driverPoint.lng"  style="margin-bottom: 20px; text-align: right; padding: 10px;">
                     <van-button type="info"
                                 color="rgb(26,216,226)"
-                                @click="onClick_DrivingDirections_receiveOrder">导航至接送点</van-button>
+                                @click="$refs.selectedMap1.popup_show = true">导航至接送点</van-button>
                 </div>
 
                 <van-button v-if="orderData.orderStatus === 'receive_order'"
@@ -26,7 +26,7 @@
                 <div v-if="orderData.orderStatus === 'in_trip'" style="margin-bottom: 20px; text-align: right; padding: 10px;">
                     <van-button type="info"
                                 color="rgb(26,216,226)"
-                                @click="onClick_DrivingDirections_inTrip">开始导航</van-button>
+                                @click="$refs.selectedMap2.popup_show = true">开始导航</van-button>
                 </div>
 
                 <van-button v-if="orderData.orderStatus === 'in_trip'"
@@ -35,6 +35,9 @@
                             size="large" @click="onOk_arrived">到达目的地</van-button>
             </div>
         </div>
+
+        <vSelectedMap ref="selectedMap1" @callback="onClick_DrivingDirections_receiveOrder"></vSelectedMap>
+        <vSelectedMap ref="selectedMap2" @callback="onClick_DrivingDirections_inTrip"></vSelectedMap>
     </div>
 </template>
 
@@ -42,9 +45,11 @@
     import comMixin from '../../../../../lib/mixins/comMixin';
     import baiduMixin from '../../../../../lib/mixins/baiduMixin';
     import initBMap from '../../../../../lib/baidu/initBMap';
+    import vSelectedMap from '../../../../common/selectedMap/selectedMap';
     export default {
         name: 'vOnTrip', // 订单状态是 已接单或者行程中；['receive_order', 'in_trip']
         mixins: [comMixin, baiduMixin],
+        components: { vSelectedMap },
         data () {
             return {
                 title: '接送中',
@@ -250,27 +255,42 @@
             },
 
             // 导航到接送点
-            onClick_DrivingDirections_receiveOrder() {
-                let str = `
-                ${this.driverPoint.lat},
-                ${this.driverPoint.lng},
-                ${this.orderData.beginLat},
-                ${this.orderData.beginLng},
-                当前位置,
-                ${this.orderData.beginAddress}`;
-                Toaster.postMessage(str);
+            onClick_DrivingDirections_receiveOrder(mapType) {
+                this.$refs.selectedMap1.popup_show = false;
+                this.BD_driver_baidu(
+                    this.driverPoint.lat,
+                    this.driverPoint.lng,
+                    this.orderData.beginLat,
+                    this.orderData.beginLng,
+                    '当前位置',
+                    this.orderData.beginAddress,
+                    '',
+                    mapType
+                );
+               // let str = `${this.driverPoint.lat},${this.driverPoint.lng},${this.orderData.beginLat},${this.orderData.beginLng},当前位置,${this.orderData.beginAddress},''`;
+               // Toaster.postMessage(str);
             },
             // 跳转到百度地图导航
-            onClick_DrivingDirections_inTrip() {
-                let str = `
-                ${this.orderData.beginLat},
-                ${this.orderData.beginLng},
-                ${this.orderData.endLat},
-                ${this.orderData.endLng},
-                ${this.orderData.beginAddress},
-                ${this.orderData.endAddress}`;
-                Toaster.postMessage(str);
-                // Toaster.postMessage('js调用Flutter sgj2');
+            onClick_DrivingDirections_inTrip(mapType) {
+                this.$refs.selectedMap2.popup_show = false;
+                // let str = `
+                // ${this.orderData.beginLat},
+                // ${this.orderData.beginLng},
+                // ${this.orderData.endLat},
+                // ${this.orderData.endLng},
+                // ${this.orderData.beginAddress},
+                // ${this.orderData.endAddress}`;
+                this.BD_driver_baidu(
+                    this.orderData.beginLat,
+                    this.orderData.beginLng,
+                    this.orderData.endLat,
+                    this.orderData.endLng,
+                    this.orderData.beginAddress,
+                    this.orderData.endAddress,
+                    '',
+                    mapType
+                );
+                // Toaster.postMessage(str);
             }
         }
     }

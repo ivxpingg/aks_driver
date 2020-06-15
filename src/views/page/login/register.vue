@@ -34,6 +34,7 @@
         <div>
             <van-button round type="info" size="large">注册</van-button>
         </div>
+
     </div>
 </template>
 
@@ -48,6 +49,8 @@
                     code: ''
                 }
             };
+        },
+        methods: {
         }
     }
 </script>

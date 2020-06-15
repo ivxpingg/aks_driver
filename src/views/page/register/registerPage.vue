@@ -112,8 +112,17 @@
                     <van-button round type="info"
                                 color="rgb(26,216,226)"
                                 size="large"
+                                :disabled="!agree"
                                 @click="nextStep" style="margin-top: 20px;">下一步</van-button>
                 </div>
+
+                <div style="padding: 0px 20px 40px;">
+                    <van-checkbox v-model="agree" shape="square" icon-size="14">已阅读并同意
+                        <span style="color: #1989fa" @click="$router.push({name: 'userPolicy'})">《用户协议》</span>
+                        <span>和</span>
+                        <span style="color: #1989fa" @click="$router.push({name: 'privacyPolicy'})">《隐私协议》</span></van-checkbox>
+                </div>
+
             </div>
 
             <div class="step-two" v-if="step === 'two'">
@@ -190,6 +199,21 @@
                     @cancel="datetimePicker_show = false"
                     @confirm="dateOk"></van-datetime-picker>
         </van-popup>
+
+        <van-dialog v-model="show"
+                    title="用户协议及隐私政策"
+                    confirm-button-text="同意"
+                    confirm-button-color="#07c160"
+                    cancel-button-text="暂不使用"
+                    @confirm="agreeInfo"
+                    show-cancel-button>
+            <div style="padding: 16px 20px">
+                请您务必审慎阅读、充分理解"用户协议"和"隐私协议",各条款。您可以阅读：
+                <div><span style="color: #1989fa" @click="$router.push({name: 'userPolicy'})">《用户协议》</span></div>
+                <div><span style="color: #1989fa" @click="$router.push({name: 'privacyPolicy'})">《隐私协议》</span></div>
+                了解详细信息，如您同意，请点击同意开始接受我们的服务！
+            </div>
+        </van-dialog>
     </div>
 </template>
 
@@ -211,6 +235,8 @@
         },
         data () {
             return {
+                show: true,
+                agree: false,
                 datetimePicker_show: false,
                 currentDate: new Date(),
                 step: 'one', // 第几步
@@ -442,6 +468,10 @@
                 }).catch(() => {
                     this.overlayValue = false;
                 })
+            },
+            agreeInfo() {
+                this.show = false;
+                this.agree = true;
             }
         }
     }
