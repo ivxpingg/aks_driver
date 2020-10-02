@@ -314,8 +314,8 @@
                     this.$toast('身份证不能为空');
                     reValue = false;
                 }
-                else if (this.formData.idNumber.trim() === '') {
-                    this.$toast('身份证不能为空');
+                else if (this.formData.idNumber.trim().length !== 18) {
+                    this.$toast('请输入正确身份证号');
                     reValue = false;
                 }
                 else if (this.formData.companyName.trim() === '') {
@@ -324,6 +324,10 @@
                 }
                 else if (this.formData.phone.trim() === '') {
                     this.$toast('联系电话不能为空');
+                    reValue = false;
+                }
+                else if (!this.isPhoneNumber(this.formData.phone.trim())) {
+                    this.$toast('请输入正确电话号码');
                     reValue = false;
                 }
                 else if (this.formData.address.trim() === '') {
@@ -343,6 +347,10 @@
                     this.$toast('父亲身份证不能为空');
                     reValue = false;
                 }
+                else if (this.formData.fatherIdNumber.trim().length !== 18) {
+                    this.$toast('请输入正确父亲身份证号');
+                    reValue = false;
+                }
                 else if (this.formData.motherName.trim() === '') {
                     this.$toast('母亲姓名不能为空');
                     reValue = false;
@@ -355,9 +363,13 @@
                     this.$toast('母亲身份证不能为空');
                     reValue = false;
                 }
+                else if (this.formData.motherIdNumber.trim().length !== 18) {
+                    this.$toast('请输入正确母亲身份证号');
+                    reValue = false;
+                }
 
-                else if (this.formData.licensePlate.trim() === '') {
-                    this.$toast('车牌号不能为空');
+                else if (!this.isCardNumber(this.formData.licensePlate.trim())) {
+                    this.$toast('请输入正确正牌号');
                     reValue = false;
                 }
                 else if (this.fileList_personCar.length === 0) {

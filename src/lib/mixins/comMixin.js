@@ -85,6 +85,15 @@ export default {
             if (noWan.toString().length < 4) noWan = "0" + noWan;
             return overWan ? getWan(overWan) + "万" + getWan(noWan) : getWan(num);
 
+        },
+
+        // 判断是否手机号格式
+        isPhoneNumber(str) {
+            return str.match(/^1[0-9]{10}$/) !== null;
+        },
+        // 判断是否是车牌号
+        isCardNumber(str) {
+            return /^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$/.test(str);
         }
     }
 }
