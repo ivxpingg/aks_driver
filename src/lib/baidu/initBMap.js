@@ -1,7 +1,7 @@
 
 let setMap = (domId, zoom, point) => {
     let map = new BMap.Map(domId, {enableMapClick:false, minZoom:0,maxZoom:26});    // 创建Map实例,关闭底图可点功能
-    map.centerAndZoom(point || '阿克苏', zoom || 12);  // 初始化地图,设置中心点坐标和地图级别
+    map.centerAndZoom(point || '阿克苏', zoom || 16);  // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 
     setMapStyle(map);
@@ -34,13 +34,13 @@ let setMapStyle = (Map) => {
                 "visibility": "off"
             }
         },
-        {
-            "featureType": "local",
-            "elementType": "labels",
-            "stylers": {
-                "visibility": "off"
-            }
-        },
+        // {
+        //     "featureType": "local",
+        //     "elementType": "labels",
+        //     "stylers": {
+        //         "visibility": "off"
+        //     }
+        // },
         {
             "featureType": "water",
             "elementType": "all",
@@ -48,13 +48,13 @@ let setMapStyle = (Map) => {
                 "color": "#d1e5ff"
             }
         },
-        {
-            "featureType": "poi",
-            "elementType": "labels",
-            "stylers": {
-                "visibility": "off"
-            }
-        }
+        // {
+        //     "featureType": "poi",
+        //     "elementType": "labels",
+        //     "stylers": {
+        //         "visibility": "off"
+        //     }
+        // }
     ];
     // Map.setMapStyleV2({
     //     styleJson: styleJson
