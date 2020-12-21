@@ -18,6 +18,11 @@
                             :orderData="item"></vUserOrder>
             </div>
         </div>
+
+        <van-overlay :show="isLoader" style="display: flex; justify-content: center; align-items: center;">
+            <van-loading  size="24px">加载中...</van-loading>
+        </van-overlay>
+
     </div>
 </template>
 
@@ -26,6 +31,7 @@
     import baiduMixin from '../../../lib/mixins/baiduMixin';
     import initBMap from '../../../lib/baidu/initBMap';
     import vUserOrder from './module/userOrder/userOrder';
+    import { mapState } from 'vuex';
     export default {
         name: 'vOrderReceiving',  // 一键抢单
         mixins: [comMixin, baiduMixin],
@@ -38,6 +44,14 @@
             if (this.timerForDriverPosition) {
                 clearTimeout(this.timerForDriverPosition);
             }
+        },
+        destroyed() {
+            if (this.timing)  clearTimeout(this.timing);
+        },
+        computed: {
+            ...mapState({
+                appPoint: state => state.app.appPoint
+            })
         },
         data () {
             return {
@@ -63,53 +77,73 @@
                 drivingRoute: null,
 
                 // 定时器，上传司机位置信息
-                timerForDriverPosition: null
+                timerForDriverPosition: null,
+                timing: null,
+                times: 1, // 调用定位次数,不能为0
+                isLoader: true
             };
+        },
+        beforeMount() {
+            if (this.appPoint) {
+                this.isLoader = false;
+            }
         },
         mounted() {
             let that = this;
             this.height = window.innerHeight - 46;
-            initBMap('baidu_dom').then((map) => {
-                this.map = map;
-               // this.getLocation();
+
+            if (!this.appPoint) {
                 setTimeout(() => {
-                    this.getLocation();
-                }, 2000)
-            });
+                    this.loadMap();
+                }, 300)
+            }
+            else {
+                this.loadMap();
+            }
+
             this.getLastTaxiOrderDetail();
 
            this.uploadDriverPosition();
         },
+        watch: {
+            appPoint(val) {
+                if (val)
+                this.map.panTo(val);
+            }
+        },
         methods: {
+            loadMap() {
+                initBMap('baidu_dom', null, this.appPoint).then((map) => {
+                    this.isLoader = false;
+                    this.map = map;
+                    this.getLocation();
+                    setTimeout(() => {
+                        this.getLocation();
+                    }, 200)
+                    setTimeout(() => {
+                        this.getLocation();
+                    }, 1000)
+                });
+            },
             getLocation() {
-                // let that = this;
-                // let geolocation = new BMap.Geolocation();
-                // geolocation.getCurrentPosition(function(r){
-                //     if(this.getStatus() === BMAP_STATUS_SUCCESS){
-                //         that.map.centerAndZoom(r.point, 15);
-                //         that.myOverlay = that.BD_now_position_overlay(that.map, r.point);
-                //     } else {
-                //         that.map.removeOverlay(that.myOverlay);
-                //         that.myOverlay = null;
-                //         that.$notify('无法定位到您的当前位置');
-                //     }
-                // }, {
-                //     enableHighAccuracy: true,
-                //     maximumAge: 0
-                // });
 
                 let r = this.BD_getLocation_app();
                 if (r.state) {
+                    this.times = 1;
                     this.map.panTo(r.point);
                     this.myOverlay = this.BD_now_position_overlay(this.map, r.point);
                 }
                 else {
                     setTimeout(() => {
+                        this.times++;
                         this.getLocation();
-                    }, 3000)
+                    }, 1000)
                     this.map.removeOverlay(this.myOverlay);
                     this.myOverlay = null;
-                    this.$notify('无法定位到您的当前位置');
+
+                    if ((this.times / 10) % 1 === 0) {
+                        this.$notify('无法定位到您的当前位置');
+                    }
                 }
             },
             // 获取当前执行订单详情

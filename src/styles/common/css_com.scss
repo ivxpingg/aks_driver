@@ -1,5 +1,20 @@
 // 公共样式
-
+.hairline__bottom{
+  position: relative;
+  &:after {
+    position: absolute;
+    box-sizing: border-box;
+    content: ' ';
+    pointer-events: none;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    border: 0 solid #ebedf0;
+    border-width: 0 0 1px;
+    transform: scale(.5);
+  }
+}
 
 //
 .ivx-fixed-bottom{
@@ -8,4 +23,23 @@
   right: 0;
   bottom: 0;
   z-index: 999;
+}
+
+// van-nav-bar
+.van-nav-bar {
+  background: rgba(0, 156, 255, 1);
+  .van-nav-bar__left {
+    .van-icon {
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  .van-nav-bar__title {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: bold;
+  }
+
+  .van-nav-bar__text {
+    color: #fff;
+  }
 }

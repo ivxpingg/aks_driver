@@ -18,9 +18,8 @@
 
         </div>
         <div class="where-panel-btn-panel">
-            <van-button type="primary"
+            <van-button type="info"
                         size="large"
-                        color="rgb(26,216,226)"
                         @click="getOrder">一 键 抢 单</van-button>
         </div>
     </div>

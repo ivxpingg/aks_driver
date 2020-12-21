@@ -23,8 +23,8 @@ module.exports = {
     lintOnSave: false,
     devServer: {
         open: false,
-        host: 'localhost',
-        // host: '192.168.1.15',
+        // host: 'localhost',
+        host: '192.168.1.4',
         port: 9002,
         hot: true,
         https: false,

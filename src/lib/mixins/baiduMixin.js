@@ -1,3 +1,4 @@
+
 export default {
     data() {
         return {
@@ -45,7 +46,7 @@ export default {
                     // city: window.ikey_city,
                     point: new BMap.Point(window.ikey_lng, window.ikey_lat)
                 };
-
+                this.$store.commit('setMapPosition', loc);
                 return loc;
             }
         },

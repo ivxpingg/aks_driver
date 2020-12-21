@@ -44,14 +44,12 @@
 <style lang="scss" scoped>
     .userCenter-container {
         .logout {
-            position: fixed;
-            bottom: 60px;
-            background: #FFF;
-            width: 100%;
+            margin-top: 20px;
             line-height: 40px;
             text-align: center;
             font-size: 14px;
-            color: red;
+            text-decoration: underline;
+            color: #5A5A5A;
         }
     }
 </style>

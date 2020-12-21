@@ -18,14 +18,26 @@
 <script>
     import vLog from './log';
     import vRegister from './register';
+    import baiduMixin from '../../../lib/mixins/baiduMixin';
     export default {
         name: 'vLogin',
         components: {vLog, vRegister},
+        mixins: [baiduMixin],
         data () {
             return {
                 activeName: 'login',
-                show: true
+                show: true,
+                timer: null
             };
+        },
+        destroyed() {
+            if (this.timer) clearInterval(this.timer);
+        },
+        mounted() {
+            this.BD_getLocation_app();
+            this.timer = setInterval(() => {
+                this.BD_getLocation_app();
+            }, 2000)
         }
     }
 </script>

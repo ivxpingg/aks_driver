@@ -57,8 +57,8 @@
             content: " ";
             width: 1000px;
             height: 1000px;
-            background-color: #1AD8E2;
-            border-radius: 50%;
+            background-color: #009cff;
+            /*border-radius: 50%;*/
             top: -1000px;
             left: -500px;
             margin-top: 140px;
@@ -70,22 +70,23 @@
             display: flex;
             padding: 26px;
             > img {
-                height: 60px;
-                width: 60px;
+                height: 74px;
+                width: 74px;
                 border-radius: 50%;
+                border: 4px solid rgba(255, 255, 255, 0.3);
             }
             .name {
                 padding-left: 10px;
                 font-size: 16px;
                 color: #FFF;
-                line-height: 40px;
+                line-height: 30px;
                 font-weight: 700;
             }
             .start, .count {
                 padding-left: 10px;
-                font-size: 12px;
+                font-size: 13px;
                 color: #FFF;
-                line-height: 26px;
+                line-height: 1.5;
             }
         }
     }

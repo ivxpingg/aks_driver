@@ -58,7 +58,6 @@
                                 size="large" @click="onOk_set">发起收款</van-button>
                     <van-button v-if="orderData.orderStatus === 'wait_pay' || orderData.orderStatus === 'pay'"
                                 type="info"
-                                color="rgb(26,216,226)"
                                 size="large" @click="onOk_get">确认收款</van-button>
                     <van-button v-if="orderData.orderStatus === 'wait_pay' || orderData.orderStatus === 'pay'"
                                 type="danger"

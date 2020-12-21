@@ -46,10 +46,16 @@
     import baiduMixin from '../../../../../lib/mixins/baiduMixin';
     import initBMap from '../../../../../lib/baidu/initBMap';
     import vSelectedMap from '../../../../common/selectedMap/selectedMap';
+    import {mapState} from "vuex";
     export default {
         name: 'vOnTrip', // 订单状态是 已接单或者行程中；['receive_order', 'in_trip']
         mixins: [comMixin, baiduMixin],
         components: { vSelectedMap },
+        computed: {
+            ...mapState({
+                appPoint: state => state.app.appPoint
+            })
+        },
         data () {
             return {
                 title: '接送中',
@@ -76,36 +82,27 @@
                 },
 
                 timerForTaxiPosition:  null,
-                x: 0.001
+                x: 0.001,
+                times: 1, // 调用定位次数,不能为0
             };
         },
         mounted() {
             this.height = window.innerHeight - 46;
-            initBMap('baidu_ontrip_dom').then((map) => {
+            if (this.mapPosition && this.mapPosition.point) {
+                point = this.mapPosition.point;
+            }
+            initBMap('baidu_ontrip_dom', null, this.appPoint).then((map) => {
                 this.map = map;
                 this.getLocation();
+                setTimeout(() => {
+                    this.getLocation();
+                }, 300)
                 this.getLastTaxiOrderDetail();
             });
         },
         methods: {
             // 定位
             getLocation() {
-                // let that = this;
-                // let geolocation = new BMap.Geolocation();
-                // geolocation.getCurrentPosition(function(r){
-                //     that.setTimerForWaitOrder();
-                //     if(this.getStatus() === BMAP_STATUS_SUCCESS){
-                //         if (that.driverOverlay) {
-                //             that.map.removeOverlay(that.driverOverlay);
-                //             that.driverOverlay = null;
-                //         }
-                //         that.setDriverPosition(r.point);
-                //     } else {
-                //
-                //         that.$notify('无法定位到您的当前位置');
-                //     }
-                // },{enableHighAccuracy: true, maximumAge: 0});
-
                 let r = this.BD_getLocation_app();
                 this.setTimerForWaitOrder();
                 if (r.state) {
